@@ -1,0 +1,13 @@
+name: PexTime
+main: Top.q44920040.Minecarft_PexTime.PexTimeMain
+version: 1.0
+author: q44920040
+commands:
+  PexTime:
+    permission: PexTime.user
+    permission-message: "无权使用"
+permissions:
+  PexTime.user:
+    default: true
+  PexTime.admin:
+    default: op
