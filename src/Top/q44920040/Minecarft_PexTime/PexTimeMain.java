@@ -18,7 +18,7 @@ public class PexTimeMain extends JavaPlugin {
             }
         s = new Dao(getDataFolder().getPath()+File.separator+"PexTime");
         Bukkit.getPluginManager().registerEvents( new PlayerListener(),this);
-        System.out.print("===========Pex程序启动成功==============");
+        System.out.print("§2===========Pex程序启动成功==============");
         super.onEnable();
     }
 
@@ -30,7 +30,6 @@ public class PexTimeMain extends JavaPlugin {
                 if(sender.isOp()){
 //                    System.out.println("是OP添加");
                     AddPexTime(args, sender);
-                    sender.sendMessage("§");
                 }
                 PexUserInfo(args,sender);
             }else {
@@ -50,10 +49,10 @@ public class PexTimeMain extends JavaPlugin {
             ArrayList<String> TempUserdata = s.GetUserSQLiteData(args[1]);
             if (!TempUserdata.isEmpty()){
                 for(String res:TempUserdata){
-                    player.sendMessage("玩家名|权限|到期时间:"+res);
+                    player.sendMessage("§4[PexTime]§2§l玩家名|权限|到期时间:§e§l"+res);
                 }
             }else {
-                player.sendMessage("未查到任何数据");
+                player.sendMessage("§4[PexTime]§2未查到任何数据");
             }
         }
     }
@@ -63,9 +62,9 @@ public class PexTimeMain extends JavaPlugin {
             if (args[3].split("-").length==3){
                 s.AddSQLiteData(args[0],args[2],args[3],args[4]);
                 Bukkit.getServer().dispatchCommand(Bukkit.getServer().getConsoleSender(),"manuaddp "+args[0]+" "+args[2]);
-                sender.sendMessage("添加成功");
+                sender.sendMessage("§4[PexTime]§2添加成功。");
             }else {
-                sender.sendMessage("[PexTime]你时间输入格式有误,如10-3-5,为10天3小时5分钟");
+                sender.sendMessage("§4[PexTime]§2你时间输入格式有误,如10-3-5,为10天3小时5分钟");
             }
         }
     }
