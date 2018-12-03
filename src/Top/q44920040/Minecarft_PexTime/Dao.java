@@ -37,7 +37,7 @@ public class Dao {
             statement = connection.createStatement();
             String[] a =onTime.split("-");
             String sql1 = "SELECT PlayerName,Pex,PexReName,PexexpireTime FROM PexTimeTable where PlayerName='"+PlayerName+"'AND Pex='"+Pex+"' and PexReName='"+PexReName+"'";
-            String sql3 = "INSERT INTO PexTimeTable(Pex,PlayerName,PexexpireTime,PexReName)values('"+Pex+"','"+PlayerName+"',datetime('now','+"+a[0]+" day','+"+a[1]+" hour','+"+a[2]+" minute'),'"+PexReName+"')";
+            String sql3 = "INSERT INTO PexTimeTable(Pex,PlayerName,PexexpireTime,PexReName)values('"+Pex+"','"+PlayerName+"',datetime('now','localtime','+"+a[0]+" day','+"+a[1]+" hour','+"+a[2]+" minute'),'"+PexReName+"')";
             ResultSet rs = statement.executeQuery(sql1);
             if (rs.next()){
 //                System.out.println("确认有叠加数据");
@@ -76,7 +76,7 @@ public class Dao {
         try {
             connection.setAutoCommit(false);
             statement = connection.createStatement();
-            String sql = "select * from PexTimeTable where PlayerName='"+UserName+"' AND PexexpireTime<datetime('now')";
+            String sql = "select * from PexTimeTable where PlayerName='"+UserName+"' AND PexexpireTime<datetime('now','localtime')";
             ResultSet rs = statement.executeQuery(sql);
 //            System.out.print(sql);
             while (rs.next()){

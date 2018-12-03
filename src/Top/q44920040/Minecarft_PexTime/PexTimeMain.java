@@ -27,14 +27,17 @@ public class PexTimeMain extends JavaPlugin {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (label.equalsIgnoreCase("PexTime")){
             if (sender instanceof Player){
-                if(sender.isOp()){
+                if(sender.hasPermission("")){
 //                    System.out.println("是OP添加");
                     AddPexTime(args, sender);
+                    PexUserInfo(args,sender);
+                }else {
+                    PexUserInfoName(args,sender);
                 }
-                PexUserInfo(args,sender);
             }else {
 //                System.out.println("是控制台添加");
                 AddPexTime(args, sender);
+                PexUserInfo(args,sender);
             }
         }
         return super.onCommand(sender, command, label, args);
@@ -47,6 +50,19 @@ public class PexTimeMain extends JavaPlugin {
         if (args.length==2&&args[0].equalsIgnoreCase("info")){
 //            System.out.println("进入内部了");
             ArrayList<String> TempUserdata = s.GetUserSQLiteData(args[1]);
+            if (!TempUserdata.isEmpty()){
+                for(String res:TempUserdata){
+                    player.sendMessage("§4[PexTime]§2§l玩家名|权限|到期时间:§e§l"+res);
+                }
+            }else {
+                player.sendMessage("§4[PexTime]§2未查到任何数据");
+            }
+        }
+    }
+
+    private void PexUserInfoName(String[] args,CommandSender player){
+        if (args.length==1&&args[0].equalsIgnoreCase("info")){
+            ArrayList<String> TempUserdata = s.GetUserSQLiteData(player.getName());
             if (!TempUserdata.isEmpty()){
                 for(String res:TempUserdata){
                     player.sendMessage("§4[PexTime]§2§l玩家名|权限|到期时间:§e§l"+res);
